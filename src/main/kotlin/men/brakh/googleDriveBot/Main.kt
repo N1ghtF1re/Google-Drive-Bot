@@ -6,20 +6,17 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+object ResourceLoader {
+    fun load(name: String): InputStream? {
+        return ResourceLoader::javaClass::class.java.classLoader.getResourceAsStream(name)
+    }
 
-private fun String.asResource(work: (InputStream) -> Unit) {
-    val content = this.javaClass::class.java.getResourceAsStream(this)
-    work(content)
 }
-
 
 fun main() {
     val properties = Properties()
 
-    "application.properties".asResource {
-        properties.load(it)
-    }
-
+    properties.load(ResourceLoader.load("application.properties"))
 
     val bot = GoogleDriveBot(gdClient = GoogleDriveClientImpl(properties.getProperty("googledrive.application.name")),
         groupId = properties.getProperty("vk.bot.groupId").toInt(),
