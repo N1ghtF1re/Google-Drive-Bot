@@ -52,6 +52,7 @@ class LongPollListener(private val vk: VkApiClient,
                     handlers[type]?.handle(it.get("object").asJsonObject)
                 }
             } catch (e: LongPollServerKeyExpiredException) {
+                logger.info("Key expired. Regeneration...")
                 connect()
             }
 
