@@ -4,7 +4,6 @@ import com.vk.api.sdk.client.TransportClient
 import com.vk.api.sdk.client.VkApiClient
 import com.vk.api.sdk.client.actors.GroupActor
 import com.vk.api.sdk.httpclient.HttpTransportClient
-import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse
 import com.vk.api.sdk.objects.messages.MessageAttachment
 import men.brakh.googleDriveBot.driveClient.GoogleDriveClient
 import men.brakh.googleDriveBot.driveClient.GoogleDriveFile
@@ -38,15 +37,8 @@ class GoogleDriveBot(private val gdClient: GoogleDriveClient,
     }
 
     fun startLongPolling() {
-        val getLongPollResponse: GetLongPollServerResponse = vk.groups()
-            .getLongPollServer(actor)
-            .execute()
-
-
         LongPollListener(vk = vk,
-                        server = getLongPollResponse.server,
-                        key = getLongPollResponse.key,
-                        ts = getLongPollResponse.ts)
+                        actor = actor)
             .addHandler("message_new", getNewMessageHandler())
             .start()
     }
