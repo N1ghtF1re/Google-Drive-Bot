@@ -18,7 +18,7 @@ repositories {
 
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:"
 
 
@@ -40,4 +40,16 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+
+
+jar {
+
+    manifest {
+        attributes 'Main-Class': 'men.brakh.googleDriveBot.MainKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
 }
