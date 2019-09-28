@@ -1,0 +1,13 @@
+.gradle/*
+build/*
+gradle/*
+.idea/*
+.ideaDataSources/*
+out/*
+log/*
+*.iml
+*.ipr
+*.iws
+*.log
+src/main/resources/credentials.json
+tokens/

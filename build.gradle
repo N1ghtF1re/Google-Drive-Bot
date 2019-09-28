@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.40'
+}
+
+
+
+group 'men.brakh'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/skeptick/maven/" }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:"
+
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-drive:v3-rev110-1.23.0'
+
+    compile 'com.vk.api:sdk:0.5.12'
+    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.22'
+
+}
+
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
