@@ -4,6 +4,7 @@ import com.vk.api.sdk.callback.longpoll.responses.GetLongPollEventsResponse
 import com.vk.api.sdk.client.VkApiClient
 import com.vk.api.sdk.client.actors.Actor
 import com.vk.api.sdk.client.actors.GroupActor
+import com.vk.api.sdk.exceptions.ClientException
 import com.vk.api.sdk.exceptions.LongPollServerKeyExpiredException
 import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse
 import men.brakh.googleDriveBot.vkbot.handler.Handler
@@ -53,6 +54,9 @@ class LongPollListener(private val vk: VkApiClient,
                 }
             } catch (e: LongPollServerKeyExpiredException) {
                 logger.info("Key expired. Regeneration...")
+                connect()
+            } catch (e: ClientException) {
+                logger.error("Long poll error", e)
                 connect()
             }
 
